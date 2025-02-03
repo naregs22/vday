@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+        
+        body {
+            text-align: center;
+            font-family: 'Courier Prime', monospace;
+            background: url('./background.jpg') no-repeat center center fixed;
+            background-size: contain;
+            background-color: #c74f4f;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        h1 {
+            color: #d50000;
+        }
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            position: relative;
+        }
+        #yesBtn {
+            background-color: #4cc3c5;
+            color: white;
+        }
+        #noBtn {
+            background-color: #5c2e28;
+            color: white;
+            position: absolute;
+            transition: top 0.2s, left 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my Valentine? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="yesClicked()">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+    
+    <script>
+        function yesClicked() {
+            window.location.href = "/yes";
+        }
+        
+        function moveButton() {
+            const button = document.getElementById("noBtn");
+            const maxX = window.innerWidth - button.clientWidth - 20;
+            const maxY = window.innerHeight - button.clientHeight - 20;
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        function animateNoButton() {
+            const button = document.getElementById("noBtn");
+            let moveInterval = setInterval(() => {
+                moveButton();
+            }, 1000);
+            
+            button.addEventListener("mouseover", moveButton);
+            button.addEventListener("touchstart", moveButton); // Makes it move on touch screens
+        }
+        
+        document.addEventListener("DOMContentLoaded", animateNoButton);
+    </script>
+</body>
+</html>
