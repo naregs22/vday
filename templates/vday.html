@@ -36,16 +36,16 @@
         }
         .buttons {
             margin-top: 20px;
-            position: relative;
+            display: flex;
+            gap: 20px;
         }
         button {
             font-size: 18px;
             padding: 10px 20px;
-            margin: 10px;
             cursor: pointer;
             border: none;
             border-radius: 5px;
-            position: relative;
+            transition: all 0.3s ease-in-out;
         }
         #yesBtn {
             background-color: #4cc3c5;
@@ -54,8 +54,6 @@
         #noBtn {
             background-color: #5c2e28;
             color: white;
-            position: absolute;
-            transition: top 0.2s, left 0.2s;
         }
     </style>
 </head>
@@ -64,7 +62,7 @@
         <h1>Will you be my Valentine? 💖</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="yesClicked()">Yes</button>
-            <button id="noBtn">No</button>
+            <button id="noBtn" onclick="noClicked()">No</button>
         </div>
     </div>
     
@@ -73,27 +71,22 @@
             window.location.href = "/yes";
         }
         
-        function moveButton() {
-            const button = document.getElementById("noBtn");
-            const maxX = window.innerWidth - button.clientWidth - 20;
-            const maxY = window.innerHeight - button.clientHeight - 20;
-            const x = Math.random() * maxX;
-            const y = Math.random() * maxY;
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-        }
-
-        function animateNoButton() {
-            const button = document.getElementById("noBtn");
-            let moveInterval = setInterval(() => {
-                moveButton();
-            }, 1000);
+        function noClicked() {
+            const yesButton = document.getElementById("yesBtn");
+            const noButton = document.getElementById("noBtn");
             
-            button.addEventListener("mouseover", moveButton);
-            button.addEventListener("touchstart", moveButton); // Makes it move on touch screens
+            let yesSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            let noSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+            
+            yesButton.style.fontSize = (yesSize + 2) + "px";
+            yesButton.style.padding = (yesSize + 10) + "px " + (yesSize + 20) + "px";
+            
+            if (noSize > 5) {
+                noButton.style.fontSize = (noSize - 2) + "px";
+                noButton.style.padding = (noSize - 5) + "px " + (noSize - 10) + "px";
+            }
         }
-        
-        document.addEventListener("DOMContentLoaded", animateNoButton);
     </script>
 </body>
 </html>
+
